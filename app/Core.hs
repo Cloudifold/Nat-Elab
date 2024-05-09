@@ -51,6 +51,10 @@ data Raw
   | RTwo
   | REmpty
   | REmptyElim Raw
+  | RNat
+  | RZero
+  | RSucc Raw
+  | RInd Name Name Raw Raw Raw Raw
   | RIf Raw Raw Raw -- if x t u
   | RTyIf Raw Raw Raw -- if x t u
   | RU -- U
@@ -76,6 +80,10 @@ data Term
   | Empty
   | EmptyElim Term
   | Two
+  | Nat
+  | Zero
+  | Succ Term
+  | Ind Term Term Term Term
   | If Term Term Term
   | TyIf Term Term Term
   | U
@@ -123,27 +131,19 @@ data Term
     ctxt |- App (Lam x t) u = t(u) : B(u)
 
 
+    ctxt
+    ------
+    zero : Nat
 
-    ctxt , x : A |- B(x) : U
+    ctxt , n : Nat
     ----------------
-    ctxt |- W x A B : U
+    succ n : Nat
 
-    ctxt |- u : A , t : Pi y B(u) (W x A B)
+    ctxt , x : Nat |- B(x) : U
+    ctxt |- base : B(zero)
+    ctxt , x : Nat , p : P(x) |- step(p,x) : P(succ x)
     ----------------
-    ctxt |- Sup u t : W x A B
-
-
-    ctxt , w : W x A B |- C(w) : U
-    ctxt |- w : W x A B 
-    ctxt , u : A , t : Pi y B(u) (W x A B) , v : Pi z B(u) C(u(z)) |-  c(u,t,v) : C(Sup u t)
-    ----------------
-    ctxt |- Wrec w c(u,t,v) : C(w)
-
-    ctxt |- u : A , t : Pi y B(u) (W x A B)
-    ctxt , w : W x A B |- C(w) : U
-    ctxt , u : A , t : Pi y B(u) (W x A B) , v : Pi z B(u) C(t(z)) |-  c(u,t,v) : C(Sup u t)
-    ----------------
-    ctxt |- Wrec (Sup u t) c = c(u, t, (Lam z (Wrec t(z) c))) : C(Sup u t)
+    ctxt , n : Nat |- Ind B base step n : Nat
 
 -}
 
@@ -165,6 +165,10 @@ data Val
   | VTt
   | VFf
   | VTwo
+  | VNat
+  | VZero
+  | VSucc ~Val
+  | VInd ~Val ~Val ~Val ~Val
   | VIf ~Val ~Val ~Val
   | VTyIf ~Val ~Val ~Val
   | VLam Name {-# UNPACK #-} Closure
@@ -196,6 +200,13 @@ eval env t = case t of
   Tt -> VTt
   Ff -> VFf
   Two -> VTwo
+  Nat -> VNat
+  Zero ->VZero
+  Succ t -> VSucc (eval env t)
+  Ind n m b s -> case (eval env n) of
+    VZero -> (eval env b)
+    VSucc n' -> (eval env (App (App s (quote (Lvl (length env)) n')) (Ind (quote (Lvl (length env)) n') m b s)))
+    _ -> VInd (eval env n) (eval env m) (eval env b) (eval env s)
   If x a b -> case (eval env x) of
     VTt -> (eval env a)
     VFf -> (eval env b)
@@ -229,6 +240,10 @@ quote l v = case v of
   VUnit -> Unit
   VTt -> Tt
   VFf -> Ff
+  VNat -> Nat
+  VSucc t -> Succ (quote l t)
+  VZero -> Zero
+  VInd x t u r -> Ind (quote l x) (quote l t) (quote l u) (quote l r)
   VTwo -> Two
   VIf x t u -> If (quote l x) (quote l t) (quote l u)
   VTyIf x t u -> TyIf (quote l x) (quote l t) (quote l u)
@@ -261,7 +276,11 @@ conv l t u = case (t, u) of
   (VEmpty, VEmpty) -> True
   (VEmptyElim v, _) -> True
   (_, VEmptyElim v) -> True
+  (VNat, VNat) -> True
+  (VZero, VZero) -> True
+  (VSucc t, VSucc t') -> conv l t t'
   (VIf x a b, VIf x' a' b') -> conv l a a' && conv l b b' && conv l x x'
+  (VInd n m b s, VInd n' m' b' s') -> conv l n n' && conv l m m' && conv l b b' && conv l s s'
   (VTyIf x a b, VTyIf x' a' b') -> conv l a a' && conv l b b' && conv l x x'
   (VPi _ a b, VPi _ a' b') ->
     conv l a a'
@@ -361,13 +380,39 @@ infer ctxt = \case
 
   RLam s raw -> report ctxt $ "Cannot infer type for lambda expression"
   RApp t u -> do
-    (t, tty) <- infer ctxt t
+    (t, tty) <- trace "APP" $ infer ctxt t
     case tty of
       VPi s a clo -> do
         u <- check ctxt u a
         pure (App t u, clo $$ eval (env ctxt) u)
       tty -> report ctxt $ "Expect a function type, instead inferred:\n\n  " ++ showVal ctxt tty
   RU -> pure (U, VU)
+  RNat -> pure (Nat, VU)
+  RZero -> pure (Zero, VNat)
+  RSucc n -> do
+    n <- check ctxt n VNat
+    pure (Succ n, VNat)
+  RInd x p n m' b s -> do
+    (n, a) <- infer ctxt n
+    (m, mot) <- infer ctxt m'
+    -- to fix :  s,tt <- infer ctxt s
+    
+    let e = (env ctxt)
+    if conv (lvl ctxt) a VNat
+      then case mot of
+        VPi _ VNat mott -> do
+          b <- trace (show (quote (lvl ctxt) (eval e m))) $ check ctxt b (eval e (App m Zero))
+          (tt, u) <- infer ctxt (RPi x RNat (RPi p (RApp m' (RVar x)) (RApp m' (RSucc (RVar x)))))
+          s <- check ctxt s (eval e tt)
+          pure (Ind n m b s, (eval e (App m n)))
+        _ -> report ctxt
+            (printf
+              "Expect a function type from Nat to U, instead of inferred type:\n\n  %s\n"
+              (showVal ctxt (eval e m)))
+      else report ctxt
+          (printf
+            "Error, inferred type:\n\n  %s\n"
+            (showVal ctxt (eval e m)))
   RTop -> pure (Top, VUnit)
   RUnit -> pure (Unit, VU)
   RFf  -> pure (Ff, VTwo)
@@ -423,7 +468,7 @@ infer ctxt = \case
 -- printing precedences
 atomp = 4 :: Int -- U, var
 appp = 3 :: Int -- application
-wp   = 2 :: Int -- W, wrec, sup
+np   = 2 :: Int -- ind
 pip = 1 :: Int -- pi
 letp = 0 :: Int -- let, lambda
 
@@ -460,9 +505,13 @@ prettyTerm prec = go prec
       Tt -> ("t" ++)
       Unit -> ("Unit" ++)
       Empty -> ("Empty" ++)
-      EmptyElim t -> ("EmptyElim " ++) . go p ns t
+      EmptyElim t -> ("emptyElim " ++) . go p ns t
       Two -> ("Two" ++)
-      If x t u -> ("If " ++) . go p ns x . (", " ++) . go p ns t . (", " ++) . go p ns u
+      Nat -> ("Nat" ++)
+      Zero -> ("zero" ++)
+      Succ t -> ("succ " ++) . go p ns t
+      Ind n m b s -> par p np $ ("ind " ++) . go p ns n . (", " ++) . go p ns m . (", " ++) . go p ns b . (", " ++) . go p ns s
+      If x t u -> ("if " ++) . go p ns x . (", " ++) . go p ns t . (", " ++) . go p ns u
       TyIf x t u -> ("TyIf " ++) . go p ns x . (", " ++) . go p ns t . (", " ++) . go p ns u
       Pi "_" a b -> par p pip $ go appp ns a . (" -> " ++) . go pip ("_" : ns) b
       Pi (fresh ns -> x) a b -> par p pip $ piBind ns x a . goPi (x : ns) b
@@ -499,8 +548,9 @@ keyword :: String -> Bool
 keyword x = x == "let" || x == "in"
   || x == "λ" || x == "U"
   || x == "f" || x == "t"
-  || x == "Unit" || x == "Two"
+  || x == "Unit" || x == "Two" || x == "on" || x == "step" || x == "base"
   || x == "EmptyElim" || x == "Empty" 
+  || x == "Nat" || x == "ind" || x == "zero"  || x == "succ" 
   || x == "top" || x == "if" || x == "TyIf"
 
 
@@ -517,8 +567,8 @@ pKeyword kw = do
 
 pAtom :: Parser Raw
 pAtom =
-  withPos ((RVar <$> pIdent) <|> (RUnit <$ symbol "Unit") <|> (RU <$ symbol "U") <|> (RFf <$ symbol "f") <|> (RTt <$ symbol "t")
-  <|> (RTwo <$ symbol "Two")  <|> (RTop <$ symbol "top")) 
+  withPos (RVar <$> pIdent) <|> (RUnit <$ symbol "Unit") <|> (RU <$ symbol "U") <|> (RFf <$ symbol "f") <|> (RTt <$ symbol "t")
+  <|> (RTwo <$ symbol "Two")  <|> (RTop <$ symbol "top") <|> (RZero <$ symbol "zero") <|> (RNat <$ symbol "Nat")
   <|> (REmpty <$ symbol "Empty")
     <|> parens pRaw
 
@@ -538,6 +588,19 @@ pEmptyElim = do
   t <- pRaw
   pure (REmptyElim t)
 
+
+pSucc = do
+  symbol "succ"
+  t <- pRaw
+  pure (RSucc t)
+
+
+pInd = do
+  (n,m,b) <- ((,,) <$> (symbol "ind" *> pRaw) <*> (symbol "on" *> pRaw) <*> (symbol "base" *> pRaw))
+  (x,p,s) <- ((,,) <$> (symbol "step" *> pBinder) <*> (symbol "on" *> pBinder) <*> (symbol "is" *> pRaw))
+  pure (RInd x p n m b s)
+
+  
 
 pIf = do
   (x,a,b) <- ((,,) <$> (symbol "if" *> pRaw) <*> (symbol "," *> pRaw) <*> (symbol "," *> pRaw))
@@ -576,6 +639,7 @@ pLet = do
 
 
 pRaw = withPos (pLam <|> pLet <|> try pTyIf <|> try pIf  <|> try pPi
+  <|> try pInd <|> try pSucc
   <|> pEmptyElim <|> funOrSpine)
 
 pSrc = ws *> pRaw <* eof

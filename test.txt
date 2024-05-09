@@ -1,0 +1,24 @@
+-- let id : (A : U) -> A -> A
+--      = \A x. x in
+-- let const : (A B : U) -> A -> B -> A
+--      = \A B x y. x in
+
+
+-- Church natural numbers
+-- let negbool : Two -> Two = (if f else t) in
+-- let Nat : U = (Two -> Two) -> Two -> Two in
+-- let ttwo : Nat =  \s z. s (s z) in
+-- let five : Nat = \s z. s (s (s (s (s z)))) in-
+-- let add  : Nat -> Nat -> Nat = \a b s z. a s (b s z) in
+-- let mul  : Nat -> Nat -> Nat = \a b s z. a (b s) z in
+-- let ten      : Nat = mul five ttwo in
+-- let hundred  : Nat = mul ten ten in
+-- let kz : Two -> U = (\s . if s then Nat else (Nat -> Nat -> Nat)) in
+-- (kz f)
+
+-- let Kz : U = (s : Two) -> (TyIf s, Unit , Empty) in
+-- let zz : Kz = \x . if x, ttwo, add in
+let neg : Two -> Two = (\s . if s, f, t) in
+let mot : (nn : Nat) -> U = \nn . Nat in
+let www : Nat -> Nat = \n . (ind n on mot base zero step x on p is \x p . (succ (succ p))) in
+www (succ (succ zero))
