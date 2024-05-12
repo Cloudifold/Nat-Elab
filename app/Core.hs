@@ -54,7 +54,7 @@ data Raw
   | RNat
   | RZero
   | RSucc Raw
-  | RInd Name Name Raw Raw Raw Raw
+  | RInd Raw Raw Raw Raw
   | RIf Raw Raw Raw -- if x t u
   | RTyIf Raw Raw Raw -- if x t u
   | RU -- U
@@ -325,6 +325,9 @@ data Ctxt = Ctxt {env :: Env, types :: Types, lvl :: Lvl, pos :: SourcePos}
 emptyCxt :: SourcePos -> Ctxt
 emptyCxt = Ctxt [] [] 0
 
+names :: Ctxt -> [Name]
+names (Ctxt env types l pos) = map fst types
+
 -- | Extend Cxt with a bound variable.
 bind :: Name -> VTy -> Ctxt -> Ctxt
 bind x ~a (Ctxt env types l pos) =
@@ -376,7 +379,7 @@ check ctxt t a = case (t, a) of
       report ctxt
           (printf
           "type mismatch\n\nexpected type:\n\n  %s\n\ninferred type:\n\n  %s\n"
-          (showVal ctxt a) (showVal ctxt tty)) 
+          (showVal ctxt a) (showVal ctxt tty))
     pure t
 
 infer :: Ctxt -> Raw -> M (Term, VTy)
@@ -402,27 +405,17 @@ infer ctxt = \case
   RSucc n -> do
     n <- check ctxt n VNat
     pure (Succ n, VNat)
-  RInd x p n m' b s -> do
-    (n, a) <- infer ctxt n
-    (m, mot) <- infer ctxt m'
+  RInd n m' b s -> do
+    n <- check ctxt n VNat
+    m <- check ctxt m' (VPi (fresh (names ctxt) "_") VNat (Closure ((VVar (lvl ctxt)): (env ctxt)) U))
     -- to fix :  s,tt <- infer ctxt s
-    
+    let x = (fresh (names ctxt) "x_")
+    tt <- check ctxt (RPi x RNat (RPi (fresh (names ctxt) "p_") (RApp m' (RVar x)) (RApp m' (RSucc (RVar x))))) VU
     let e = (env ctxt)
-    if conv (lvl ctxt) a VNat
-      then case mot of
-        VPi _ VNat mott -> do
-          b <- check ctxt b (eval e (App m Zero))
-          (tt, u) <- infer ctxt (RPi x RNat (RPi p (RApp m' (RVar x)) (RApp m' (RSucc (RVar x)))))
-          s <- check ctxt s (eval e tt)
-          pure (Ind n m b s, (eval e (App m n)))
-        _ -> report ctxt
-            (printf
-              "Expect a function type from Nat to U, instead of inferred type:\n\n  %s\n"
-              (showVal ctxt (eval e m)))
-      else report ctxt
-          (printf
-            "Error, inferred type:\n\n  %s\n"
-            (showVal ctxt (eval e m)))
+    b <- check ctxt b (eval e (App m Zero))
+    s <- check ctxt s (eval e tt)
+    pure (Ind n m b s, (eval e (App m n)))
+
   RTop -> pure (Top, VUnit)
   RUnit -> pure (Unit, VU)
   RFf  -> pure (Ff, VTwo)
@@ -434,32 +427,17 @@ infer ctxt = \case
     b <- check (bind x va ctxt) b VU
     pure (Pi x a b, VU)
   RTyIf x t u -> do
-    (x, c) <- infer ctxt x
-    (t, a) <- infer ctxt t
-    (u, b) <- infer ctxt u
-    (case conv (lvl ctxt) a VU && conv (lvl ctxt) b VU of
-      True -> if conv (lvl ctxt) c VTwo
-        then pure (TyIf x t u, VU)
-        else report ctxt
-          (printf
-            "Two type mismatch\n\nexpected type:\n\n  %s\n\ninferred type:\n\n  %s\n"
-            (showVal ctxt VTwo) (showVal ctxt c))
-      False -> report ctxt
-          (printf
-            "%s and %s should both be types instead of terms \n"
-            (showVal ctxt a) (showVal ctxt b)))
+    x <- check ctxt x VTwo
+    t <- check ctxt t VU
+    u <- check ctxt u VU
+    pure (TyIf x t u, VU)
   RIf x t u -> do
-    (x, c) <- infer ctxt x
+    x <- check ctxt x VTwo
     (t, a) <- infer ctxt t
     (u, b) <- infer ctxt u
-    (if conv (lvl ctxt) c VTwo
-      then if conv (lvl ctxt) a b
-        then pure (If x t u, a)
-        else pure (If x t u, VTyIf (eval (env ctxt) x) a b)
-      else report ctxt
-        (printf
-          "Two type mismatch\n\nexpected type:\n\n  %s\n\ninferred type:\n\n  %s\n"
-          (showVal ctxt VTwo) (showVal ctxt c)))
+    if conv (lvl ctxt) a b
+      then pure (If x t u, a)
+      else pure (If x t u, VTyIf (eval (env ctxt) x) a b)
       
   REmpty -> pure (Empty, VU)
   REmptyElim t -> report ctxt $ "Cannot infer type for EmptyElim"
@@ -607,8 +585,8 @@ pSucc = do
 
 pInd = do
   (n,m,b) <- ((,,) <$> (symbol "ind" *> pRaw) <*> (symbol "on" *> pRaw) <*> (symbol "base" *> pRaw))
-  (x,p,s) <- ((,,) <$> (symbol "step" *> pBinder) <*> (symbol "on" *> pBinder) <*> (symbol "is" *> pRaw))
-  pure (RInd x p n m b s)
+  s <- (symbol "step" *> pRaw)
+  pure (RInd n m b s)
 
   
 
