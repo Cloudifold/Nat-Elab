@@ -203,10 +203,20 @@ eval env t = case t of
   Nat -> VNat
   Zero ->VZero
   Succ t -> VSucc (eval env t)
-  Ind n m b s -> case (eval env n) of
-    VZero -> (eval env b)
-    VSucc n' -> (eval env (App (App s (quote (Lvl (length env)) n')) (Ind (quote (Lvl (length env)) n') m b s)))
-    _ -> VInd (eval env n) (eval env m) (eval env b) (eval env s)
+  Ind n m b s -> goInd (eval env n) m b s
+    where
+      goInd nn m b s = case nn of
+        VZero -> (eval env b)
+        VSucc n' ->
+          let ss = (case (eval env s) of
+                VLam x s' -> s' $$ n'
+                VPi _ a' b' ->  b' $$ n'
+                s' -> VApp s' n') in
+          case (ss, goInd n' m b s) of
+            (VLam _ t, u) -> t $$ u
+            (VPi _ a b, t) ->  b $$ t
+            (t, u) -> VApp t u
+        ne -> VInd ne (eval env m) (eval env b) (eval env s)
   If x a b -> case (eval env x) of
     VTt -> (eval env a)
     VFf -> (eval env b)
@@ -380,7 +390,7 @@ infer ctxt = \case
 
   RLam s raw -> report ctxt $ "Cannot infer type for lambda expression"
   RApp t u -> do
-    (t, tty) <- trace "APP" $ infer ctxt t
+    (t, tty) <- infer ctxt t
     case tty of
       VPi s a clo -> do
         u <- check ctxt u a
@@ -401,7 +411,7 @@ infer ctxt = \case
     if conv (lvl ctxt) a VNat
       then case mot of
         VPi _ VNat mott -> do
-          b <- trace (show (quote (lvl ctxt) (eval e m))) $ check ctxt b (eval e (App m Zero))
+          b <- check ctxt b (eval e (App m Zero))
           (tt, u) <- infer ctxt (RPi x RNat (RPi p (RApp m' (RVar x)) (RApp m' (RSucc (RVar x)))))
           s <- check ctxt s (eval e tt)
           pure (Ind n m b s, (eval e (App m n)))
@@ -511,8 +521,8 @@ prettyTerm prec = go prec
       Zero -> ("zero" ++)
       Succ t -> ("succ " ++) . go p ns t
       Ind n m b s -> par p np $ ("ind " ++) . go p ns n . (", " ++) . go p ns m . (", " ++) . go p ns b . (", " ++) . go p ns s
-      If x t u -> ("if " ++) . go p ns x . (", " ++) . go p ns t . (", " ++) . go p ns u
-      TyIf x t u -> ("TyIf " ++) . go p ns x . (", " ++) . go p ns t . (", " ++) . go p ns u
+      If x t u -> par p letp $ ("if " ++) . go p ns x . (", " ++) . go p ns t . (", " ++) . go p ns u
+      TyIf x t u -> par p letp $ ("TyIf " ++) . go p ns x . (", " ++) . go p ns t . (", " ++) . go p ns u
       Pi "_" a b -> par p pip $ go appp ns a . (" -> " ++) . go pip ("_" : ns) b
       Pi (fresh ns -> x) a b -> par p pip $ piBind ns x a . goPi (x : ns) b
       Let (fresh ns -> x) a t u ->

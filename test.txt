@@ -19,6 +19,8 @@
 -- let Kz : U = (s : Two) -> (TyIf s, Unit , Empty) in
 -- let zz : Kz = \x . if x, ttwo, add in
 let neg : Two -> Two = (\s . if s, f, t) in
-let mot : (nn : Nat) -> U = \nn . Nat in
-let www : Nat -> Nat = \n . (ind n on mot base zero step x on p is \x p . (succ (succ p))) in
-www (succ (succ zero))
+let mot1 : (nn : Nat) -> U = \nn . Two in
+let www : Nat -> Two = \n . (ind n on mot1 base t step x on p is \x p . (neg p)) in
+let mot2 : (nnn : Nat) -> U = \xy . (TyIf (www xy), Nat , Two) in
+let wwww : (ns : Nat) -> (TyIf (www ns), Nat , Two) = \n . (ind n on mot2 base zero step xx on pp is (\xx pp . (if (www xx), zero, t))) in
+mot2  (succ (succ zero))
