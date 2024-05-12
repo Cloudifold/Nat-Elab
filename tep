@@ -1,0 +1,410 @@
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VTyIf (VInd (VVar 4) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 4,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VLam "xy" ....,VLam "n" ....,....]
+                 [("n",VNat),("mot2",VPi "nnn" ....),("www",VPi "_" ....),....]
+                 (Lvl 5) (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RVar ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = _
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....) (RVar "n")
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = _
+t :: Raw = RVar "n"
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = _
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VLam "xy" ....,VLam "n" ....,....]
+                 [("n",VNat),("mot2",VPi "nnn" ....),("www",VPi "_" ....),....]
+                 (Lvl 5) (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RVar ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "_" VNat (Closure [VVar 5,VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VPi "_" VNat (Closure [...,....] U)
+ctxt :: Ctxt = _
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....) (RVar "mot2")
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "_" VNat (Closure [VVar 5,VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VPi "_" VNat (Closure [...,....] U)
+ctxt :: Ctxt = _
+t :: Raw = RVar "mot2"
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "_" VNat (Closure [VVar 5,VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VU
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VLam "xy" ....,VLam "n" ....,....]
+                 [("n",VNat),("mot2",VPi "nnn" ....),("www",VPi "_" ....),....]
+                 (Lvl 5) (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = _
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VU
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VLam "xy" ....,VLam "n" ....,....]
+                 [("n",VNat),("mot2",VPi "nnn" ....),("www",VPi "_" ....),....]
+                 (Lvl 5) (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RNat
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VU
+ctxt :: Ctxt = _
+t :: Raw = RPi
+             ('p' : _) (RApp (RSrcPos ...) (RVar ...))
+             (RApp (RSrcPos ...) (RSucc ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("x_",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VU
+ctxt :: Ctxt = Ctxt
+                 [_,VVar ...,VLam "xy" ....,....]
+                 [("x_",VNat),("n",VNat),("mot2",VPi "nnn" ....),....] (Lvl 6)
+                 (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RApp
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RSrcPos ...))
+             (RVar "x_")
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("x_",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = Ctxt
+                 [_,VVar ...,VLam "xy" ....,....]
+                 [("x_",VNat),("n",VNat),("mot2",VPi "nnn" ....),....] (Lvl 6)
+                 (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RVar "x_"
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("x_",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VU
+ctxt :: Ctxt = _
+t :: Raw = RApp
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RSrcPos ...))
+             (RSucc (RVar ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("p_",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("x_",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = Ctxt
+                 [_,VVar ...,VVar ...,....]
+                 [("p_",VTyIf ... ....),("x_",VNat),("n",VNat),....] (Lvl 7)
+                 (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RSucc (RVar "x_")
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("p_",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("x_",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = Ctxt
+                 [_,VVar ...,VVar ...,....]
+                 [("p_",VTyIf ... ....),("x_",VNat),("n",VNat),....] (Lvl 7)
+                 (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RVar "x_"
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("p_",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("x_",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = _
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VLam "xy" ....,VLam "n" ....,....]
+                 [("n",VNat),("mot2",VPi "nnn" ....),("www",VPi "_" ....),....]
+                 (Lvl 5) (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....) RZero
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = _
+ctxt :: Ctxt = _
+t :: Raw = RZero
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VNat
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = _
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VLam "xy" ....,VLam "n" ....,....]
+                 [("n",VNat),("mot2",VPi "nnn" ....),("www",VPi "_" ....),....]
+                 (Lvl 5) (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RLam ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "x_" VNat (Closure [VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Pi "p_" (App (Var 2) (Var 0)) (App (Var 3) (Succ (Var 1)))))
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VPi "x_" VNat (Closure [...,....] (Pi ...))
+ctxt :: Ctxt = _
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RLam "xx" (RLam ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "x_" VNat (Closure [VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Pi "p_" (App (Var 2) (Var 0)) (App (Var 3) (Succ (Var 1)))))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VPi "x_" VNat (Closure [...,....] (Pi ...))
+ctxt :: Ctxt = _
+t :: Raw = RLam "xx" (RLam "pp" (RSrcPos ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "x_" VNat (Closure [VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Pi "p_" (App (Var 2) (Var 0)) (App (Var 3) (Succ (Var 1)))))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "x_" VNat (Closure [VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Pi "p_" (App (Var 2) (Var 0)) (App (Var 3) (Succ (Var 1)))))
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = _
+ctxt :: Ctxt = _
+t :: Raw = RLam
+             "pp" (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RSrcPos ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VPi "p_"
+    (VTyIf
+        (VInd 
+            (VVar 5) 
+            (VLam "nn"
+                (Closure 
+                    [VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+                    Two))
+            VTt
+            (VLam "x"
+                (Closure
+                    [VVar 5,
+                    VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),
+                    VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+                    (Lam "p" (App (Var 4) (Var 0))))))
+        VNat VTwo)
+    (Closure
+        [VVar 5,
+        VVar 4,
+        VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),
+        VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),
+        VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),
+        VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),
+        VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),
+        VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),
+        VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),
+        VLam "s" (Closure [] (If (Var 0) Ff Tt))] (App (Var 3) (Succ (Var 1))))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("xx",VNat),
+("n",VNat),
+("mot2",VPi "nnn" VNat
+    (Closure
+        [VLam "n" (Closure
+            [VLam "nn"
+                (Closure
+                    [VLam "s" (Closure
+                        [] (If (Var 0) Ff Tt))]
+                    Two),
+            VLam "s"
+                (Closure
+                    []
+                    (If (Var 0) Ff Tt))]
+            (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),
+        VLam "nn"
+            (Closure
+                [VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+                Two),
+        VLam "s"
+            (Closure
+                []
+                (If (Var 0) Ff Tt))]
+        U)),
+("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),
+("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),
+("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 5,VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = _
+ctxt :: Ctxt = _
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RIf ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VTyIf
+    (VIf
+        (VInd
+            (VVar 5)
+            (VLam "nn"
+                (Closure
+                    [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two))
+            VTt
+            (VLam "x"
+                (Closure
+                    [VSucc (VVar 5),
+                    VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),
+                    VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+                    (Lam "p" (App (Var 4) (Var 0))))))
+        VFf
+        VTt)
+    VNat
+    VTwo
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 6,VVar 5,VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("pp",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("xx",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VTyIf (VIf (VInd ...) VFf ....) VNat VTwo
+ctxt :: Ctxt = _
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RIf (RSrcPos ...) (RSrcPos ...) ....)
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VTyIf (VIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VSucc (VVar 5),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VFf VTt) VNat VTwo
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("pp",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("xx",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 6,VVar 5,VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VTyIf (VIf (VInd ...) VFf ....) VNat VTwo
+ctxt :: Ctxt = _
+t :: Raw = RIf
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RSrcPos ...))
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) RZero)
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) RTt)
+[app/Core.hs:(366,18)-(391,10)] ghci> a
+VTyIf (VIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VSucc (VVar 5),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VFf VTt) VNat VTwo
+[app/Core.hs:(366,18)-(391,10)] ghci> env ctxt
+[VVar 6,VVar 5,VVar 4,VLam "xy" (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (TyIf (App (Var 1) (Var 0)) Nat Two)),VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))]
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("pp",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("xx",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VTwo
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VVar ...,VVar ...,....]
+                 [("pp",VTyIf ... ....),("xx",VNat),("n",VNat),....] (Lvl 7)
+                 (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RApp ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VTwo
+ctxt :: Ctxt = _
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+             (RApp (RSrcPos ...) (RSrcPos ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VTwo
+ctxt :: Ctxt = _
+t :: Raw = RApp
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RVar ...))
+             (RSrcPos (Text.Megaparsec.Pos.SourcePos ...) (RVar ...))
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("pp",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("xx",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = Ctxt
+                 [VVar ...,VVar ...,VVar ...,....]
+                 [("pp",VTyIf ... ....),("xx",VNat),("n",VNat),....] (Lvl 7)
+                 (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....)
+t :: Raw = RSrcPos
+             (Text.Megaparsec.Pos.SourcePos "(stdin)" 25 ....) (RVar "xx")
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue
+Stopped in Core.check, app/Core.hs:(366,18)-(391,10)
+_result :: M Term = _
+a :: VTy = VNat
+ctxt :: Ctxt = _
+t :: Raw = RVar "xx"
+[app/Core.hs:(366,18)-(391,10)] ghci> types ctxt
+[("pp",VTyIf (VInd (VVar 5) (VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)) VTt (VLam "x" (Closure [VVar 5,VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Lam "p" (App (Var 4) (Var 0)))))) VNat VTwo),("xx",VNat),("n",VNat),("mot2",VPi "nnn" VNat (Closure [VLam "n" (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] (Ind (Var 0) (Var 1) Tt (Lam "x" (Lam "p" (App (Var 4) (Var 0)))))),VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("www",VPi "_" VNat (Closure [VLam "nn" (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two),VLam "s" (Closure [] (If (Var 0) Ff Tt))] Two)),("mot1",VPi "nn" VNat (Closure [VLam "s" (Closure [] (If (Var 0) Ff Tt))] U)),("neg",VPi "_" VTwo (Closure [] Two))]
+[app/Core.hs:(366,18)-(391,10)] ghci> :continue

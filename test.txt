@@ -18,9 +18,13 @@
 
 -- let Kz : U = (s : Two) -> (TyIf s, Unit , Empty) in
 -- let zz : Kz = \x . if x, ttwo, add in
-let neg : Two -> Two = (\s . if s, f, t) in
-let mot1 : (nn : Nat) -> U = \nn . Two in
-let www : Nat -> Two = \n . (ind n on mot1 base t step \x p . (neg p)) in
-let mot2 : (nnn : Nat) -> U = \xy . (TyIf (www xy), Nat , Two) in
-let wwww : (ns : Nat) -> (mot2 ns) = \n . (ind n on mot2 base zero step (\xx pp . (if (www xx), zero, t))) in
-mot2  (succ (succ zero))
+-- let neg : Two -> Two = (\s . if s, f, t) in
+-- let mot1 : (nn : Nat) -> U = \nn . Two in
+-- let www : Nat -> Two = \n . (ind n on mot1 base t step \x p . (neg p)) in
+-- let mot2 : (nnn : Nat) -> U = \xy . (TyIf (www xy), Nat , Two) in
+-- let wwww : (ns : Nat) -> (mot2 ns) = \n . (ind n on mot2 base zero step (\xx pp . (if (neg (www xx)), zero, t))) in
+-- wwww (succ zero)
+let mot : (n1 : Nat) -> U = \n1 . ((n2 : Nat) -> Nat) in
+let add  : (n1 : Nat) -> ((n2 : Nat) -> Nat) = \x . ind x on mot base (\z . z) step (\xx fun . \z . fun (succ z)) in
+let mul : (n1 : Nat) -> ((n2 : Nat) -> Nat) = \x . ind x on mot base (\z . zero) step (\xx fun . \z . add (fun z) z) in
+mul (succ (succ (succ zero))) (succ (succ zero))
